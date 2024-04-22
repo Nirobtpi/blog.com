@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\DashBoardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,9 @@ use App\Http\Controllers\HomeController;
 //     return view('welcome');
 // });
 // home route 
+
+// frontend  Route 
+
 Route::get('/',[HomeController::class,'index']);
 
 Route::get('/login',[AuthController::class,'login']);
@@ -28,3 +32,8 @@ Route::get('/register',[AuthController::class,'register']);
 Route::post('/register',[AuthController::class,'create_user']);
 
 Route::get('/forget-password',[AuthController::class,'forgetPassword']);
+
+
+// admin dash Board route 
+
+Route::get('/admin/dashboard',[DashBoardController::class,'index']);

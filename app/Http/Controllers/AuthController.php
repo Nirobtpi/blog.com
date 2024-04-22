@@ -9,7 +9,6 @@ use App\Mail\RegisterMail;
 use Illuminate\Support\Facades\Auth;
 use Psy\Util\Str;
 
-
 class AuthController extends Controller
 {
     function login(){
@@ -53,7 +52,7 @@ class AuthController extends Controller
         $password=SHA1($request->password);
         if(Auth::attempt(['email' => $request->email,'password' => $password])){
             if(Auth::user()->role == 1){
-                echo "Hello Admin";
+                return redirect('/admin/dashboard');
             }else{
                 return redirect('/');
             }
