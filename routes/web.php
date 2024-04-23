@@ -35,5 +35,7 @@ Route::get('/forget-password',[AuthController::class,'forgetPassword']);
 
 
 // admin dash Board route 
-
-Route::get('/admin/dashboard',[DashBoardController::class,'index']);
+Route::get('/logout',[AuthController::class,'logout']);
+Route::group(['middleware' => 'adminuser'], function(){
+    Route::get('/admin/dashboard',[DashBoardController::class,'index']);
+});
