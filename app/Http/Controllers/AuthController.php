@@ -51,7 +51,7 @@ class AuthController extends Controller
     function authLogin(Request $request){
         $password=SHA1($request->password);
         if(Auth::attempt(['email' => $request->email,'password' => $password])){
-            if(Auth::user()->role == 1){
+            if(Auth::user()->is_admin == 1){
                 return redirect('/admin/dashboard');
             }else{
                 return redirect('/');
