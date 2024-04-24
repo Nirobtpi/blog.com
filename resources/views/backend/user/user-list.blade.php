@@ -7,7 +7,7 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center">
                         <h5 class="card-title">Users List</h5>
-                        <a href="" class="btn btn-primary">Add New</a>
+                        <a href="{{ url('admin/users/add') }}" class="btn btn-primary">Add New</a>
                     </div>
                     <table class="table">
                         <thead>
@@ -15,7 +15,7 @@
                                 <th scope="col">#</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Email</th>
-                                <th scope="col">Role</th>
+                                <th scope="col">Status</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
@@ -26,13 +26,15 @@
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>
-                                        @if ($user->is_admin == 0)
-                                            User
+                                        @if ($user->status == 1)
+                                            Active
+                                        @else
+                                            Inactive
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="" class="btn btn-sm btn-primary">Edit</a>
-                                        <a href="" class="btn btn-sm btn-danger">Delete</a>
+                                        <a href="{{ url('admin/users/edit') }}/{{ $user->id }}" class="btn btn-sm btn-primary">Edit</a>
+                                        <a href="{{ url('admin/users/delete') }}/{{ $user->id }}" class="btn btn-sm btn-danger">Delete</a>
                                     </td>
                                 </tr>
                             @empty

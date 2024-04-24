@@ -40,4 +40,9 @@ Route::get('/logout',[AuthController::class,'logout']);
 Route::group(['middleware' => 'adminuser'], function(){
     Route::get('/admin/dashboard',[DashBoardController::class,'index']);
     Route::get('admin/users/list',[UserController::class,'index']);
+    Route::get('admin/users/add',[UserController::class,'add_user']);
+    Route::get('admin/users/edit',[UserController::class,'edit']);
+    Route::get('admin/users/delete',[UserController::class,'delete']);
+
+    Route::post('admin/users/add',[UserController::class,'insert_user']);
 });
