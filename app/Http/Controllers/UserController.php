@@ -21,8 +21,7 @@ class UserController extends Controller
         $request->validate([
             'name'=>'required',
             'email'=>['required','unique:users,email'],
-            'password'=>['required','min:8','confirmed'],
-            'password_confirmation'=>['required','same:password'],
+            'password'=>['required','confirmed','min:8'],
         ],[
             'name.required'=>'Name is required',
             'email.required'=>'Email is required',
@@ -32,7 +31,42 @@ class UserController extends Controller
             'password.confirmed'=>'Password not match',
         ]);
 
+        User::create([
+            'name'=>$request->name,
+            'email'=>$request->email,
+            'password'=>SHA1($request->password),
+            'status'=>$request->status,
+        ]);
 
-        return $request->all();
+
+        return redirect('admin/users/list')->with('success','User Created Successfully');
+    }
+
+    function edit($id){
+        $data=User::findOrFail($id);
+        return view('backend.user.edit', compact('data'));
+    }
+
+    function update_user($id,Request $request){
+
+         $request->validate([
+            'name'=>'required',
+            'email'=>['required','unique:users,email,'.$id],
+        ],[
+            'name.required'=>'Name is required',
+            'email.required'=>'Email is required',
+            'email.unique'=>'Email already used',
+        ]);
+        
+       User::findOrFail($id)->update([
+            'name'=>$request->name,
+            'email'=>$request->email,
+       ]);
+        return redirect('admin/users/list')->with('success','User Data Update Successfully');
+    }
+
+    function delete_user($id){
+        User::findOrFail($id)->delete();
+        return redirect('admin/users/list')->with('success','User Data Update Successfully');
     }
 }

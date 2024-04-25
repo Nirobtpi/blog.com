@@ -34,7 +34,7 @@
                                     </td>
                                     <td>
                                         <a href="{{ url('admin/users/edit') }}/{{ $user->id }}" class="btn btn-sm btn-primary">Edit</a>
-                                        <a href="{{ url('admin/users/delete') }}/{{ $user->id }}" class="btn btn-sm btn-danger">Delete</a>
+                                        <a onclick="return comfirm('Are You Sure')" href="{{ url('admin/users/delete') }}/{{ $user->id }}" class="btn btn-sm btn-danger">Delete</a>
                                     </td>
                                 </tr>
                             @empty
