@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\RegisterMail;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Psy\Util\Str;
 
 class AuthController extends Controller
@@ -49,12 +50,12 @@ class AuthController extends Controller
 
 
     function authLogin(Request $request){
-        $password=SHA1($request->password);
-        if(Auth::attempt(['email' => $request->email,'password' => $password])){
+    //    return $password=Hash::make($request->password);
+        if(Auth::attempt(['email' => $request->email,'password' => $request->password])){
             if(Auth::user()->is_admin == 1){
                 return redirect('/admin/dashboard');
             }else{
-                return redirect('/');
+                return redirect('/admin/dashboard');
             }
         }else{
             return back()->with('error','Your email or password is wrong');

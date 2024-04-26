@@ -5,11 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+
+use function PHPUnit\Framework\returnSelf;
 
 class UserController extends Controller
 {
     function index(){
         // $task=Task::
+        // return Auth::user()->id;
      $allUser=   User::where('is_Admin', "=", 0)->orderBy('id','DESC')->simplePaginate(3);
      return view('backend.user.user-list',compact('allUser'));
     }
@@ -34,7 +38,7 @@ class UserController extends Controller
         User::create([
             'name'=>$request->name,
             'email'=>$request->email,
-            'password'=>SHA1($request->password),
+            'password'=>Hash::make($request->password),
             'status'=>$request->status,
         ]);
 
@@ -66,7 +70,41 @@ class UserController extends Controller
     }
 
     function delete_user($id){
-        User::findOrFail($id)->delete();
-        return redirect('admin/users/list')->with('success','User Data Update Successfully');
+         $getROle=User::findOrfail($id);
+        // return $getROle->is_admin;
+
+        if($getROle->is_admin != 1){
+            User::findOrFail($id)->delete();
+            return redirect('admin/users/list')->with('success','User Data Update Successfully');
+        }else{
+             return redirect('admin/users/list')->with('success','You can not delete data');
+        }
+        
+    }
+
+    function change_password($id){
+       $password= User::findOrFail($id);
+       return view('backend.user.changepassword',compact('password'));
+    }
+
+    function passwordChange($id, Request $request){
+      $password=  User::findOrFail($id);
+        // return $password->password;
+        if( Hash::check($request->old_password, $password->password)){
+            
+            $request->validate([
+                'password'=>['required','confirmed','min:8']
+            ],[
+                'password.required'=>'Password is required',
+                'password.confirmed'=>'Password not match',
+                'password.min'=>'Min password used in 8 digit',
+            ]);
+            User::findOrFail($id)->update([
+                'password'=>Hash::make($request->password),
+            ]);
+            return back()->with('success','Password updated successfully');
+        }else{
+            return back()->with('error','Old password does not match');
+        }
     }
 }

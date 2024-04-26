@@ -1,6 +1,5 @@
     <!doctype html>
     <html lang="en">
-
     <head>
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -912,6 +911,12 @@
                                 </a>
                             </li>
                             <li>
+                                <a class="dropdown-item d-flex align-items-center" href="{{ url('/admin/users/changepassword') }}/{{ Auth::user()->id }}">
+                                    <i class="bi bi-question-circle"></i>
+                                    <span>Chnage Password</span>
+                                </a>
+                            </li>
+                            <li>
                                 <hr class="dropdown-divider">
                             </li>
 
@@ -936,20 +941,19 @@
             <ul class="sidebar-nav" id="sidebar-nav">
 
                 <li class="nav-item">
-                    <a class="nav-link " href="index.html">
+                    <a class="nav-link  @if(Request::segment(2) != 'dashboard') collapsed @endif " href="{{ url('admin/dashboard') }}">
                         <i class="bi bi-grid"></i>
                         <span>Dashboard</span>
                     </a>
                 </li>
-
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="">
+                    <a class="nav-link @if(Request::segment(2) != 'profile') collapsed @endif" href="">
                         <i class="bi bi-person"></i>
                         <span>Profile</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="{{ url('admin/users/list') }}">
+                    <a class="nav-link  @if(Request::segment(2) != 'users') collapsed @endif" href="{{ url('admin/users/list') }}">
                         <i class="bi bi-person"></i>
                         <span>Users</span>
                     </a>

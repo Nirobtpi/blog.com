@@ -25,7 +25,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($allUser as $key=> $user)
+                            {{-- @forelse ($allUser as $key=> $user)
                                 <tr>
                                     <th scope="row">{{ $allUser->firstItem() + $key }}</th>
                                     <td>{{ $user->name }}</td>
@@ -46,10 +46,10 @@
                                 <tr>
                                     <td>No data found!</td>
                                 </tr>
-                            @endforelse
+                            @endforelse --}}
                         </tbody>
                     </table>
-                    {{ $allUser->links() }}
+                    {{-- {{ $allUser->links() }} --}}
                     <!-- End Default Table Example -->
                     </>
                 </div>
