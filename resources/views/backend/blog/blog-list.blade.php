@@ -11,8 +11,8 @@
                     </div>
                 @endif
                     <div class="d-flex justify-content-between align-items-center">
-                        <h5 class="card-title">Category List</h5>
-                        <a href="{{ url('admin/category/add') }}" class="btn btn-primary">Add New</a>
+                        <h5 class="card-title">Blog List</h5>
+                        <a href="{{ url('admin/blog/add') }}" class="btn btn-primary">Add New</a>
                     </div>
                     <table class="table">
                         <thead>
@@ -26,28 +26,28 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($categories as $key=> $category)
+                            {{-- @forelse ($blogs as $key=> $category)
                                 <tr>
-                                    <th scope="row">{{ $categories->firstItem() + $key }}</th>
+                                    <th scope="row">{{ $blogs->firstItem() + $key }}</th>
                                     <td>{{ $category->name }}</td>
                                     <td>{{ $category->slug }}</td>
                                     <td>{{ $category->meta_title }}</td>
                                     <td>{{ $category->meta_description }}</td>
                                     
                                     <td>
-                                        <a href="{{ url('admin/category/edit') }}/{{ $category->id }}" class="btn btn-sm btn-primary d-block mb-1 ">Edit</a>&nbsp;&nbsp;
-                                        <a onclick="return confirm('Are You Sure')" href="{{ url('admin/category/delete') }}/{{ $category->id }}" class="btn btn-sm btn-danger d-block">Delete</a>
+                                        <a href="{{ url('admin/category/edit') }}/{{ $category->id }}" class="btn btn-sm btn-primary ">Edit</a>&nbsp;&nbsp;
+                                        <a onclick="return confirm('Are You Sure')" href="{{ url('admin/category/delete') }}/{{ $category->id }}" class="btn btn-sm btn-danger">Delete</a>
                                     </td>
                                 </tr>
                             @empty
                                 <tr>
                                     <td>No data found!</td>
                                 </tr>
-                            @endforelse
+                            @endforelse --}}
                         </tbody>
                     </table>
-                    <a class="d-flex justify-content-end" href="{{ url('admin/category/restore') }}">Restore Data</a>
-                    {{ $categories->links() }}
+                    {{-- <a class="d-flex justify-content-end" href="{{ url('admin/blog/restore') }}">Restore Data</a>
+                    {{ $blogs->links() }} --}}
                     </>
                 </div>
             </div>

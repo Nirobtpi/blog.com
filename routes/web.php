@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashBoardController;
@@ -68,6 +69,11 @@ Route::group(['middleware' => 'adminuser'], function(){
     Route::get('admin/category/restore',[CategoryController::class,'restore_list']);
     Route::get('admin/category/restore/{id}',[CategoryController::class,'restore']);
     Route::get('admin/category/delete/{id}',[CategoryController::class,'force_delete']);
+
+    // Blog Route
+
+    Route::get('admin/blog/list',[BlogController::class,'blog_list']);
+    Route::get('admin/blog/add',[BlogController::class,'blog']);
 
 
 });
