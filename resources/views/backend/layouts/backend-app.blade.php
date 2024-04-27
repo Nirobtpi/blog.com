@@ -960,8 +960,8 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="{{ url('admin/category/list') }}">
-                        <i class="bi bi-person"></i>
+                    <a class="nav-link @if(Request::segment(2) != 'category') collapsed @endif" href="{{ url('admin/category/list') }}">
+                        <i class="bi bi-badge-cc"></i>
                         <span>Category</span>
                     </a>
                 </li>

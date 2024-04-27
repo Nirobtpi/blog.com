@@ -58,6 +58,16 @@ Route::group(['middleware' => 'adminuser'], function(){
     // category route 
 
     Route::get('admin/category/list',[CategoryController::class,'index']);
+    Route::get('admin/category/add',[CategoryController::class,'add_category']);
+    Route::post('admin/category/add',[CategoryController::class,'insert_category']);
+    Route::get('admin/category/edit/{id}',[CategoryController::class,'category_edit']);
+    Route::post('admin/category/edit/{id}',[CategoryController::class,'edit']);
+    Route::get('admin/category/delete/{id}',[CategoryController::class,'delete']);
+    // restore data 
+
+    Route::get('admin/category/restore',[CategoryController::class,'restore_list']);
+    Route::get('admin/category/restore/{id}',[CategoryController::class,'restore']);
+    Route::get('admin/category/delete/{id}',[CategoryController::class,'force_delete']);
 
 
 });

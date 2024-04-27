@@ -11,8 +11,7 @@
                     </div>
                 @endif
                     <div class="d-flex justify-content-between align-items-center">
-                        <h5 class="card-title">Category List</h5>
-                        <a href="{{ url('admin/category/add') }}" class="btn btn-primary">Add New</a>
+                        <h5 class="card-title">Deleted Category List</h5>
                     </div>
                     <table class="table">
                         <thead>
@@ -35,7 +34,7 @@
                                     <td>{{ $category->meta_description }}</td>
                                     
                                     <td>
-                                        <a href="{{ url('admin/category/edit') }}/{{ $category->id }}" class="btn btn-sm btn-primary mb-2">Edit</a>&nbsp;
+                                        <a href="{{ url('admin/category/restore') }}/{{ $category->id }}" class="btn btn-sm btn-primary ">Restore</a>&nbsp;
                                         <a onclick="return confirm('Are You Sure')" href="{{ url('admin/category/delete') }}/{{ $category->id }}" class="btn btn-sm btn-danger">Delete</a>
                                     </td>
                                 </tr>
@@ -46,7 +45,6 @@
                             @endforelse
                         </tbody>
                     </table>
-                    <a class="d-flex justify-content-end" href="{{ url('admin/category/restore') }}">Restore Data</a>
                     {{ $categories->links() }}
                     </>
                 </div>
